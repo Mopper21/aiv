@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Group details</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet"/>
+    <style>
+        .output-field {
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px 0;
+        }
+        .output-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <f:view>
+
+        <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+            <div>
+                <a href="#{facesContext.externalContext.applicationContextPath}/faces/mse.xhtml" class="text-blue-600 hover:text-blue-800">Mse list</a> |
+                <a href="#{facesContext.externalContext.applicationContextPath}/faces/addmse.xhtml" class="text-blue-600 hover:text-blue-800">Add Mse</a> |
+                <a href="#{facesContext.externalContext.applicationContextPath}/faces/skupnost.xhtml" class="text-blue-600 hover:text-blue-800">Group list</a> |
+                <a href="#{facesContext.externalContext.applicationContextPath}/faces/addskupnost.xhtml" class="text-blue-600 hover:text-blue-800">Add Group</a>
+            </div>
+        </div>
+
+        <f:metadata>
+            <f:viewParam name="naziv" value="#{skupnostJSFBean.selectedNaziv}" />
+        </f:metadata>
+
+        <h3 class="output-label">Details about Group:</h3>
+        <h:panelGrid columns="2">
+            <h:outputText value="Group Name: " styleClass="output-label" />
+            <h:outputText value="#{skupnostJSFBean.selectedSkupnost.naziv}"  />
+
+            <h:outputText value="Admin's Name: " styleClass="output-label" />
+            <h:outputText value="#{skupnostJSFBean.selectedSkupnost.skrbnik.ime}"  />
+
+            <h:outputText value="Admin's Surname: " styleClass="output-label" />
+            <h:outputText value="#{skupnostJSFBean.selectedSkupnost.skrbnik.priimek}"  />
+
+            <h:outputText value="Admin's Email: " styleClass="output-label" />
+            <h:outputText value="#{skupnostJSFBean.selectedSkupnost.skrbnik.email}"  />
+
+
+        </h:panelGrid>
+
+        <hr />
+        <h3 class="output-label">MSEs in this Group:</h3>
+        <h:dataTable value="#{skupnostJSFBean.selectedSkupnost.mseList}" var="mse" styleClass="table-auto">
+            <h:column>
+                <h:outputText value="Power Usage (kW): " styleClass="output-label" />
+                <h:outputText value="#{mse.zmogljivostkW}"  />
+            </h:column>
+            <h:column>
+                <h:outputText value="Latitude: " styleClass="output-label" />
+                <h:outputText value="#{mse.location.latitude}"  />
+            </h:column>
+            <h:column>
+                <h:outputText value="Longitude: " styleClass="output-label" />
+                <h:outputText value="#{mse.location.longitude}"  />
+            </h:column>
+            <h:column>
+                <h:outputText value="Owner's Name: " styleClass="output-label" />
+                <h:outputText value="#{mse.lastnik.ime}"  />
+            </h:column>
+            <h:column>
+                <h:outputText value="Owner's Surname: " styleClass="output-label" />
+                <h:outputText value="#{mse.lastnik.priimek}"  />
+            </h:column>
+            <h:column>
+                <h:outputText value="Owner's Email: " styleClass="output-label" />
+                <h:outputText value="#{mse.lastnik.email}"  />
+            </h:column>
+        </h:dataTable>
+
+    </f:view>
+</h:body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>MSE-s</title>
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet"/>
+</h:head>
+
+<h:body>
+	<f:view>
+		<h:form>
+
+			<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+				<div>
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/mse.xhtml" class="text-blue-600 hover:text-blue-800">Mse list</a> |
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/addmse.xhtml" class="text-blue-600 hover:text-blue-800">Add Mse</a> |
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/skupnost.xhtml" class="text-blue-600 hover:text-blue-800">Group list</a> |
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/addskupnost.xhtml" class="text-blue-600 hover:text-blue-800">Add Group</a>
+				</div>
+			</div>
+
+			<h1>MSE LIST:</h1>
+
+			<h:dataTable value="#{mseJSFBean.allMse}" var="mse" styleClass="table-auto">
+
+				<h:column>
+					<h:outputText value="#{mse.zmogljivostkW}" styleClass="px-4 py-2" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{mse.location.latitude}" styleClass="px-4 py-2" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{mse.location.longitude}" styleClass="px-4 py-2" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{mse.lastnik.ime}" styleClass="px-4 py-2" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{mse.lastnik.priimek}" styleClass="px-4 py-2" />
+				</h:column>
+				<h:column>
+					<h:outputText value="#{mse.lastnik.email}" styleClass="px-4 py-2" />
+				</h:column>
+
+
+			 <h:column>
+					<h:link value="Details" outcome="details" styleClass="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+						<f:param name="zmogljivostkW" value="#{mse.zmogljivostkW}" />
+						<f:param name="latitude" value="#{mse.location.latitude}" />
+						<f:param name="longitude" value="#{mse.location.longitude}" />
+						<f:param name="ime" value="#{mse.lastnik.ime}" />
+						<f:param name="priimek" value="#{mse.lastnik.priimek}" />
+						<f:param name="email" value="#{mse.lastnik.email}" />
+					</h:link>
+
+					<h:commandButton value="Edit" action="#{mseJSFBean.editMse(mse.lastnik.email)}" styleClass="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" />
+				 <h:commandButton value="Delete" styleClass="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+								  onclick="if (!confirm('Are you sure you want to delete this MSE?')) return false;"
+								  action="#{mseJSFBean.deleteMse(mse)}" />
+			 </h:column>
+
+
+			</h:dataTable>
+		</h:form>
+	</f:view>
+</h:body>
+
+</html>
+

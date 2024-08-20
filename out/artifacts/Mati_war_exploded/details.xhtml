@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>MSE Details</title>
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet"/>
+	<style>
+		.output-field {
+			border: 1px solid black;
+			padding: 5px;
+			margin: 5px 0;
+		}
+		.output-label {
+			font-weight: bold;
+			margin-right: 10px;
+		}
+	</style>
+</h:head>
+
+<h:body>
+	<f:view>
+
+		<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+			<div>
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/mse.xhtml" class="text-blue-600 hover:text-blue-800">Mse list</a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/addmse.xhtml" class="text-blue-600 hover:text-blue-800">Add Mse</a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/skupnost.xhtml" class="text-blue-600 hover:text-blue-800">Group list</a> |
+				<a href="#{facesContext.externalContext.applicationContextPath}/faces/addskupnost.xhtml" class="text-blue-600 hover:text-blue-800">Add Group</a>
+			</div>
+		</div>
+
+		<h3 class="px-4 py-2">Details about MSE:</h3>
+		<h:panelGrid columns="2">
+			<h:outputText value="Power Usage (kW): " styleClass="output-label" />
+			<h:outputText value="#{param['zmogljivostkW']}"  />
+
+			<h:outputText value="Latitude: " styleClass="output-label" />
+			<h:outputText value="#{param['latitude']}" />
+
+			<h:outputText value="Longitude: " styleClass="output-label" />
+			<h:outputText value="#{param['longitude']}"  />
+
+			<h:outputText value="Owner's Name: " styleClass="output-label" />
+			<h:outputText value="#{param['ime']}"  />
+
+			<h:outputText value="Owner's Surname: " styleClass="output-label" />
+			<h:outputText value="#{param['priimek']}" />
+
+			<h:outputText value="Owner's Email: " styleClass="output-label" />
+			<h:outputText value="#{param['email']}"  />
+		</h:panelGrid>
+
+	</f:view>
+</h:body>
+
+</html>

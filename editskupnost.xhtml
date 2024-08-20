@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta charset="UTF-8" />
+    <title>Edit Skupnost</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet"/>
+    <style>
+        .input-field {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+        <div>
+            <a href="#{facesContext.externalContext.applicationContextPath}/faces/mse.xhtml" class="text-blue-600 hover:text-blue-800">Mse list</a> |
+            <a href="#{facesContext.externalContext.applicationContextPath}/faces/addmse.xhtml" class="text-blue-600 hover:text-blue-800">Add Mse</a> |
+            <a href="#{facesContext.externalContext.applicationContextPath}/faces/skupnost.xhtml" class="text-blue-600 hover:text-blue-800">Group list</a> |
+            <a href="#{facesContext.externalContext.applicationContextPath}/faces/addskupnost.xhtml" class="text-blue-600 hover:text-blue-800">Add Group</a>
+        </div>
+    </div>
+    <h2 class="px-4 py-2">Edit Group</h2>
+
+    <h:form>
+        Group name: <h:inputText value="#{skupnostJSFBean.selectedSkupnost.naziv}" class="px-4 py-2 input-field" /><br/>
+
+        Administrator name: <h:inputText value="#{skupnostJSFBean.selectedSkupnost.skrbnik.ime}" class="px-4 py-2 input-field" /><br/>
+        Administrator surname: <h:inputText value="#{skupnostJSFBean.selectedSkupnost.skrbnik.priimek}" class="px-4 py-2 input-field" /><br/>
+        Administrator email: <h:inputText value="#{skupnostJSFBean.selectedSkupnost.skrbnik.email}" class="px-4 py-2 input-field" /><br/><br/>
+
+        <h:selectManyCheckbox value="#{skupnostJSFBean.selectedMSEs}" class="px-4 py-2 input-field">
+            <f:selectItems value="#{mseJSFBean.allMse}" var="mse"
+                           itemLabel="#{mse.lastnik.ime} #{mse.lastnik.priimek} - #{mse.location.latitude}, #{mse.location.longitude}" class="px-4 py-2 input-field" />
+        </h:selectManyCheckbox>
+
+        <h:commandButton value="Update Group" action="#{skupnostJSFBean.saveSkupnost}" class="px-4 py-2" />
+    </h:form>
+
+</h:body>
+
+</html>

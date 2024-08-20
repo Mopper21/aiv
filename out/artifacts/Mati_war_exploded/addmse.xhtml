@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+	<meta charset="UTF-8" />
+	<title>Add MSE</title>
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet"/>
+	<style>
+		.input-field {
+			border: 1px solid black;
+			padding: 5px;
+			margin: 5px 0;
+		}
+		.output-label {
+			font-weight: bold;
+			margin-right: 10px;
+		}
+	</style>
+</h:head>
+
+<h:body>
+	<f:view>
+		<h:form>
+
+			<div class="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md flex items-center space-x-4">
+				<div>
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/mse.xhtml" class="text-blue-600 hover:text-blue-800">Mse list</a> |
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/addmse.xhtml" class="text-blue-600 hover:text-blue-800">Add Mse</a> |
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/skupnost.xhtml" class="text-blue-600 hover:text-blue-800">Group list</a> |
+					<a href="#{facesContext.externalContext.applicationContextPath}/faces/addskupnost.xhtml" class="text-blue-600 hover:text-blue-800">Add Group</a>
+				</div>
+			</div>
+
+			<h2>Insert/Edit MSE:</h2>
+
+			<h3>Usage</h3>
+			Usage (kW): <h:inputText value="#{mseJSFBean.selectedMse.zmogljivostkW}" class="input-field" /><br/><br/>
+
+			<h3 class="output-label">Location Data:</h3>
+			Latitude: <h:inputText value="#{mseJSFBean.selectedMse.location.latitude}" class="input-field" /><br/>
+			Longitude: <h:inputText value="#{mseJSFBean.selectedMse.location.longitude}" class="input-field" /><br/><br/>
+
+			<h3 class="output-label">Owner Data:</h3>
+			Name: <h:inputText value="#{mseJSFBean.selectedMse.lastnik.ime}" class="input-field" /><br/>
+			Surname: <h:inputText value="#{mseJSFBean.selectedMse.lastnik.priimek}" class="input-field" /><br/>
+			Email: <h:inputText value="#{mseJSFBean.selectedMse.lastnik.email}" class="input-field" /><br/>
+
+			<h:commandButton value="Add Mse" action="#{mseJSFBean.saveMse}" />
+
+		</h:form>
+	</f:view>
+</h:body>
+
+</html>
